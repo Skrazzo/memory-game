@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+body[data-theme="dark-purple"]{
+    --accent: #4F46E5;
+    --background: #111827;
+    --form-background: #1F2937;
+    --primary-text: #E5E7EB;
+    --secondary-text: #94979C;
+}
+
+body[data-theme="dark-red"]{
+    --accent: red;
+}
