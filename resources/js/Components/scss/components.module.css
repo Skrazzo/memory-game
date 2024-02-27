@@ -1,0 +1,61 @@
+.accent{
+    color: var(--accent);
+}
+
+.background{
+    background-color: var(--background);
+}
+
+.form{
+    background-color: var(--form-background);
+}
+
+.primary_text{
+    color: var(--primary-text);
+}
+
+.secondary_text{
+    color: var(--secondary-text);
+}
+
+.text_input{
+    border: none;
+    background-color: var(--background);
+    color: var(--secondary-text);
+    border: 1px solid var(--form-background);
+
+    &:focus{
+        box-shadow: none;
+        border: var(--accent) 1px solid;
+    }
+}
+
+.checkbox{
+    background-color: var(--background);
+    border: 1px solid var(--form-background);
+    color: var(--accent);
+
+    &:focus{
+        box-shadow: none;
+        border: var(--accent) 1px solid;
+    }
+}
+
+.hoverText{
+    color: var(--secondary-text);
+
+    &:hover{
+        color: var(--secondary-text-lighter);
+    }
+}
+
+.primary_button{
+    color: var(--primary-text);
+    background-color: var(--accent);
+    
+
+    &:hover, :focus{
+        background-color: var(--accent-darker);
+        color: var(--primary-text-lighter);
+    }
+}
