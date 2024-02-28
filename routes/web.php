@@ -18,10 +18,6 @@ use Inertia\Inertia;
 
 Route::middleware('auth')->group(function(){
     Route::get('/', function () {
-        return dd("Hello world");
-    });
-    
-    Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
     
