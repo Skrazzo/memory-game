@@ -20,11 +20,19 @@ Route::middleware('auth')->group(function(){
     Route::get('/', function () {
         return dd("Hello world");
     });
+    
+    Route::get('/dashboard', function () {
+        return Inertia::render('Dashboard');
+    })->name('dashboard');
+    
+    Route::get('/play', function () {
+        return Inertia::render('Play');
+    })->name('play');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

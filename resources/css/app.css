@@ -27,12 +27,12 @@ html, body, head{
 
 [data-theme="dark-purple"]{
     --accent: #4F46E5;
-    --accent-darker: #4039c3;
+    --accent-darker: #433ea7;
 
     --background: #111827;
     --form-background: #1F2937;
     --form-background-lighter: #374151;
-    
+
     --primary-text: #d6dae0;
     --primary-text-lighter: #ffffff;
 
@@ -40,6 +40,17 @@ html, body, head{
     --secondary-text-lighter: #b5b8bd;
 }
 
-[data-theme="dark-red"]{
-    --accent: red;
+[data-theme="dark-green"]{
+    --accent: #6DBA8F;
+    --accent-darker: #337550;
+
+    --background: #17180B;
+    --form-background: #252712;
+    --form-background-lighter: #35381c;
+
+    --primary-text: #F0F1E1;
+    --primary-text-lighter: #ffffff;
+
+    --secondary-text: #94979C;
+    --secondary-text-lighter: #b5b8bd;
 }

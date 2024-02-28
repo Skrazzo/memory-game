@@ -7,6 +7,7 @@
 }
 
 .form{
+    color: var(--secondary-text-lighter);
     background-color: var(--form-background);
 }
 
@@ -71,5 +72,18 @@
     &:hover{
         background-color: var(--form-background);
         color: var(--primary-text-lighter);
+    }
+}
+
+.nav_border_active{
+    border-bottom: 2px solid var(--accent);
+}
+
+.nav_border{
+    border-bottom: 2px solid var(--accent-darker);
+
+    &:hover{
+        color: var(--primary-text);
+        border-bottom: 2px solid var(--accent);
     }
 }
