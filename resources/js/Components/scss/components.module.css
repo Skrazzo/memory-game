@@ -92,8 +92,31 @@
     }
 }
 
+.nav_icon{
+    color: var(--secondary-text);
+    margin-right: 0.5rem;
+}
+
 .nav_border_active{
     border-bottom: 2px solid var(--accent);
+}
+
+.nav_border_active_mobile{
+    background-color: var(--background);
+    border-left: 4px solid var(--accent);
+
+    .nav_icon{
+        color: var(--accent-darker);
+    }
+}
+
+.nav_border_mobile{
+    border: 4px solid transparent;
+
+    &:hover{
+        background-color: var(--form-background-lighter);
+        border-left: 4px solid var(--secondary-text);
+    }
 }
 
 .nav_border{
@@ -104,3 +127,4 @@
         border-bottom: 2px solid var(--accent);
     }
 }
+
