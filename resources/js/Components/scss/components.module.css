@@ -99,6 +99,10 @@
 
 .nav_border_active{
     border-bottom: 2px solid var(--accent);
+
+    .nav_icon{
+        color: var(--accent);
+    }
 }
 
 .nav_border_active_mobile{
@@ -120,6 +124,7 @@
 }
 
 .nav_border{
+    color: var(--secondary-text);
     border-bottom: 2px solid var(--accent-darker);
 
     &:hover{
