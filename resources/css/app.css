@@ -16,6 +16,7 @@ html, body, head{
 
     --background: #111827;
     --form-background: #1F2937;
+    --form-background-lighter: #374151;
 
     --primary-text: #E5E7EB;
     --primary-text-lighter: #ffffff;
@@ -30,7 +31,8 @@ html, body, head{
 
     --background: #111827;
     --form-background: #1F2937;
-
+    --form-background-lighter: #374151;
+    
     --primary-text: #d6dae0;
     --primary-text-lighter: #ffffff;
 

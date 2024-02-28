@@ -10,6 +10,10 @@
     background-color: var(--form-background);
 }
 
+.form_light{
+    background-color: var(--form-background-lighter);
+}
+
 .primary_text{
     color: var(--primary-text);
 }
@@ -56,6 +60,16 @@
 
     &:hover, :focus{
         background-color: var(--accent-darker);
+        color: var(--primary-text-lighter);
+    }
+}
+
+.dropdown_link{
+    background-color: transparent;
+    color: var(--secondary-text-lighter);
+
+    &:hover{
+        background-color: var(--form-background);
         color: var(--primary-text-lighter);
     }
 }
