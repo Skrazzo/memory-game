@@ -5,6 +5,7 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
+import s from '@/Components/scss/components.module.css';
 
 export default function UpdatePasswordForm({ className = '' }) {
     const passwordInput = useRef();
@@ -39,9 +40,9 @@ export default function UpdatePasswordForm({ className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900 dark:text-gray-100">Update Password</h2>
+                <h2 className={`text-lg font-medium ${s.primary_text}`}>Update Password</h2>
 
-                <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                <p className={`mt-1 text-sm ${s.secondary_text}`}>
                     Ensure your account is using a long, random password to stay secure.
                 </p>
             </header>
@@ -104,7 +105,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
                     >
-                        <p className="text-sm text-gray-600 dark:text-gray-400">Saved.</p>
+                        <p className={`text-sm ${s.secondary_text}`}><span className='text-green-400'>✓</span> Saved.</p>
                     </Transition>
                 </div>
             </form>

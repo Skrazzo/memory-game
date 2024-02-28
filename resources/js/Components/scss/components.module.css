@@ -11,6 +11,10 @@
     background-color: var(--form-background);
 }
 
+.form_opacity{
+    background-color: var(--form-background-opacity);
+}
+
 .form_light{
     background-color: var(--form-background-lighter);
 }
@@ -59,9 +63,22 @@
     background-color: var(--accent);
     
 
-    &:hover, :focus{
+    &:hover, &:focus{
+        outline: none;
         background-color: var(--accent-darker);
         color: var(--primary-text-lighter);
+    }
+}
+
+.secondary_button{
+    background-color: transparent;
+    color: var(--secondary-text);
+    border: 1px solid var(--form-background);
+
+    &:hover, &:focus{
+        outline: none;
+        color: var(--primary-text);
+        background-color: var(--background);
     }
 }
 

@@ -31,6 +31,7 @@ html, body, head{
 
     --background: #111827;
     --form-background: #1F2937;
+    --form-background-opacity: rgba(31, 41, 55, 0.6);
     --form-background-lighter: #374151;
 
     --primary-text: #d6dae0;
@@ -46,6 +47,7 @@ html, body, head{
 
     --background: #17180B;
     --form-background: #252712;
+    --form-background-opacity: rgba(37, 39, 18, 0.6);
     --form-background-lighter: #35381c;
 
     --primary-text: #F0F1E1;
