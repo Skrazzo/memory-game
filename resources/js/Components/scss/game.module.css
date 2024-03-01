@@ -6,7 +6,6 @@
 
     display: flex;
     flex-direction: column;
-    gap: 4px;
 
     /* remove later */
     padding: 8px;
@@ -14,7 +13,6 @@
 
 .row{
     display: flex;
-    gap: 4px;
     flex-grow: 1;
 }
 
@@ -22,8 +20,31 @@
     border-radius: 0.5rem;
     flex-grow: 1;
     border: 1px solid var(--accent-darker);
+    cursor: pointer;
+
+    transition: 250ms;
+    &:hover{
+        background-color: var(--form-background-lighter);
+        background-color: var(--background);
+    }
+
+    animation: ease-out 250ms forwards tile-appear;
 }
 
+@keyframes tile-click{
+
+}
+
+@keyframes tile-appear {
+    0%{
+        opacity: 0;
+        scale: 0.5;
+    }
+    100%{
+        opacity: 1;
+        scale: 1;
+    }
+}
 
 
 /* < lg */
