@@ -28,7 +28,7 @@ export default function Authenticated({ user, header, children }) {
                                 </NavLink>
                                 
                                 <NavLink href={route('play')} active={route().current('play')}>
-                                    Play
+                                    <IconDeviceGamepad2 className={`${s.nav_icon}`}/> Play
                                 </NavLink>
                             </div>
                         </div>
