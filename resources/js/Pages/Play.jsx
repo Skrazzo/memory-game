@@ -10,7 +10,7 @@ export default function Play({ auth }) {
         >
             <Head title="Play" />
 
-            <div className={`${s.form} my-12 max-w-7xl mx-auto sm:px-6 lg:px-8`}>
+            <div className={`${s.form} my-12 max-w-7xl md:mx-4 md:rounded-lg xl:mx-auto sm:px-6 lg:px-8`}>
                 <Game />
             </div>
         </Authenticated>
