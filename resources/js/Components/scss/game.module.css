@@ -31,6 +31,28 @@
     animation: ease-out 250ms forwards tile-appear;
 }
 
+.right_anim{
+    animation: right_anim 1s forwards;
+}
+
+@keyframes right_anim {
+    0%{
+        background-color: transparent;
+    }
+
+    20%{
+        background-color: var(--accent);
+    }
+
+    80%{
+        background-color: var(--accent);
+    }
+
+    100%{
+        background-color: transparent;
+    }
+}
+
 @keyframes tile-click{
 
 }
