@@ -1,6 +1,6 @@
 .container{
     margin: 0 auto;
-    border: 1px solid var(--accent);
+    /* border: 1px solid var(--accent); */
     width: 50%;
     aspect-ratio: 1;
 
@@ -32,7 +32,7 @@
 }
 
 .right_anim{
-    animation: right_anim 1s forwards;
+    animation: right_anim 1.5s forwards;
 }
 
 @keyframes right_anim {
@@ -60,11 +60,11 @@
 @keyframes tile-appear {
     0%{
         opacity: 0;
-        scale: 0.5;
+        /* scale: 0.5; */
     }
     100%{
         opacity: 1;
-        scale: 1;
+        /* scale: 1; */
     }
 }
 

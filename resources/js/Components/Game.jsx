@@ -1,6 +1,7 @@
-import { IconLayoutDistributeVertical } from "@tabler/icons-react";
+import { IconHeart, IconHeartFilled, IconLayoutDistributeVertical } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import s from '@/Components/scss/game.module.css';
+import main from '@/Components/scss/components.module.css';
 import GameTile from "./GameTile";
 
 
@@ -9,6 +10,8 @@ export default function Game() {
     const [level, setLevel] = useState(0);
     const [mounted, setMounted] = useState(false);
     const [showAnim, setShowAnim] = useState(false);
+    const [points, setPoints] = useState(0);
+    const [lives, setLives] = useState(2);
 
     // function to generate random right tile positions
     function generate_rand_tiles(x, count) {
@@ -60,7 +63,7 @@ export default function Game() {
 
         setTimeout(() => {
             setShowAnim(true);
-            setTimeout(() => setShowAnim(false), 1000);
+            setTimeout(() => setShowAnim(false), 1500);
         }, 500);
         
     }
@@ -75,8 +78,18 @@ export default function Game() {
 
     return (
         <div>
-             <button onClick={() => setLevel(level - 1)} className="m-1 bg-blue-500 p-2 rounded">lower</button>
-            <button onClick={level_up} className="m-1 bg-blue-500 p-2 rounded">up</button>
+            <div className="text-center py-4">
+                <p className="text-xl">Level <strong className={`${main.accent}`}>{level}</strong> - <strong className={`${main.accent}`}>{points}</strong> points</p>
+                <div className={`${main.accent} flex gap-2 text-center justify-center`}>
+                    {Array.from({ length: 3 }, (x, i) => {
+                        if(i >= lives){
+                            return <IconHeartFilled className="opacity-40" size={44}/>;
+                        }
+                        return <IconHeartFilled size={44}/>;
+                    })}
+                </div>
+
+            </div>
             
             <div className={`${s.container} gap-${(cfg.layout >= 5) ? '1' : '3'}`}>
                 {Array.from({ length: cfg.layout }, (x, i) => {
