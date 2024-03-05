@@ -12,7 +12,6 @@ export default function Game() {
     const [mounted, setMounted] = useState(false);
     const [showAnim, setShowAnim] = useState(false);
     const [points, setPoints] = useState(0);
-    const [lives, setLives] = useState(1);
 
     // function to generate random right tile positions
     function generate_rand_tiles(x, count) {
@@ -32,6 +31,7 @@ export default function Game() {
         right_tiles_places: generate_rand_tiles(9, 3),
         right_clicked: [],
         wrong_clicked: [],
+        lives: 3,
     });
 
     function return_tile_place(x, y, layout = 3){
@@ -61,6 +61,7 @@ export default function Game() {
             ...newCFG,
             right_clicked: [],
             wrong_clicked: [],
+            lives: 3,
             right_tiles_places: generate_rand_tiles((newCFG.layout * newCFG.layout), newCFG.right_tiles),
         });
 
@@ -81,10 +82,19 @@ export default function Game() {
         return false;
     }
 
+    function has_user_lost(){
+        if(cfg.lives <= 0) return true;
+        return false;
+    }
+
+    function reset_game(){
+        setLevel(0);
+    }
+
     function tileClickHandler(obj){
         if(cfg.right_clicked.includes(obj.place)) return;
         if(cfg.wrong_clicked.includes(obj.place)) return;
-
+        
         if(obj.right) { // clicked tile is right
             setCFG({
                 ...cfg,
@@ -95,9 +105,9 @@ export default function Game() {
         }else{ // wrong tile is clicked
             setCFG({
                 ...cfg,
-                wrong_clicked: [...cfg.wrong_clicked, obj.place]
+                wrong_clicked: [...cfg.wrong_clicked, obj.place],
+                lives: cfg.lives - 1
             });
-            // TODO: remove live
             // TODO: remove points
         }
     }
@@ -105,9 +115,17 @@ export default function Game() {
     // TODO: make use effect for live change, and when its 0 game over
 
 
+
     useEffect(() => {
         if(has_user_won()){
             level_up();
+        }
+
+        if(has_user_lost()){
+            reset_game();
+            // TODO: show score (maybe modal)
+            // TODO: reset score
+            // TODO: has to make post to the backend and submit result
         }
 
         console.log('cfg', cfg);
@@ -120,7 +138,7 @@ export default function Game() {
                 <p className="text-xl">Level <strong className={`${main.accent}`}>{level}</strong> - <strong className={`${main.accent}`}>{points}</strong> points</p>
                 <div className={`${main.accent} flex gap-2 text-center justify-center`}>
                     {Array.from({ length: 3 }, (x, i) => {
-                        if(i >= lives){
+                        if(i >= cfg.lives){
                             return <IconHeartFilled key={v4()} className="opacity-40" size={44}/>;
                         }
                         return <IconHeartFilled key={v4()} size={44}/>;
