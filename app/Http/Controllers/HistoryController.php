@@ -10,20 +10,35 @@ class HistoryController extends Controller
     public function game_over(Request $req){
         $res = array('response' => '', 'success' => false);
         
-        $validator = Validator::make($req->all(), [
+        $val = Validator::make($req->all(), [
             'level' => 'required|min:1|integer',
             'points' => 'required|integer'
         ]);
 
-        if ($validator->fails()) {
-            $res['response'] = $validator->messages();
+        if ($val->fails()) {
+            $res['response'] = $val->messages();
         } else {
-            if($req->user()->history()->create($validator->valid())){
+            $data = $val->valid();
+            $user = $req->user();
+
+            if($user->history()->create($data)){
                 $res['success'] = true;
-                $res['response'] = 'Successfully created game record!';
+                
+                $user_best = $user->history()->orderBy('points', 'DESC')->first(); // get users best result
+                
+                $res_arr = [
+                    'new_best' => false,
+                    'best' => $user_best, // either its users best, or old best record, depends on new_best
+                    'average_points' => $user->history()->avg('points'),
+                    'game_count' => $user->history()->count()
+                ];
+                
+                if($data['points'] > $user_best['points']){ // new personal best
+                    $res_arr['new_best'] = true;
+                }
+                
+                $res['response'] = $res_arr;
             }
-
-
         }
         
         return $res;
