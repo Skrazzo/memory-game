@@ -35,6 +35,20 @@
     animation: right_anim 1.5s forwards;
 }
 
+.right_clicked{
+    background-color: var(--accent);
+    &:hover{
+        background-color: var(--accent);
+    }
+}
+
+.wrong_clicked{
+    background-color: var(--background);
+    &:hover{
+        background-color: var(--background);
+    }
+}
+
 @keyframes right_anim {
     0%{
         background-color: transparent;
@@ -60,11 +74,9 @@
 @keyframes tile-appear {
     0%{
         opacity: 0;
-        /* scale: 0.5; */
     }
     100%{
         opacity: 1;
-        /* scale: 1; */
     }
 }
 

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import s from '@/Components/scss/game.module.css';
 import main from '@/Components/scss/components.module.css';
 import GameTile from "./GameTile";
+import { v4 } from "uuid";
 
 
 
@@ -11,7 +12,7 @@ export default function Game() {
     const [mounted, setMounted] = useState(false);
     const [showAnim, setShowAnim] = useState(false);
     const [points, setPoints] = useState(0);
-    const [lives, setLives] = useState(2);
+    const [lives, setLives] = useState(1);
 
     // function to generate random right tile positions
     function generate_rand_tiles(x, count) {
@@ -28,15 +29,13 @@ export default function Game() {
     const [cfg, setCFG] = useState({ // default cfg for first level
         layout: 3,
         right_tiles: 3,
-        right_tiles_places: generate_rand_tiles(9, 3)
+        right_tiles_places: generate_rand_tiles(9, 3),
+        right_clicked: [],
+        wrong_clicked: [],
     });
 
     function return_tile_place(x, y, layout = 3){
         return ((layout * y) + (1 * x)) + 1;
-    }
-
-    function generate_tiles(){
-        setRightTiles(generate_rand_tiles((cfg.layout * cfg.layout), cfg.right_tiles));
     }
 
     function calculate_cfg(){
@@ -57,6 +56,7 @@ export default function Game() {
         };
 
         setCFG({
+            ...cfg,
             ...newCFG,
             right_tiles_places: generate_rand_tiles((newCFG.layout * newCFG.layout), newCFG.right_tiles),
         });
@@ -72,6 +72,29 @@ export default function Game() {
         setLevel(level + 1);
     }
 
+    function tileClickHandler(obj){
+        if(cfg.right_clicked.includes(obj.place)) return;
+        if(cfg.wrong_clicked.includes(obj.place)) return;
+
+        if(obj.right) { // clicked tile is right
+            setCFG({
+                ...cfg,
+                right_clicked: [...cfg.right_clicked, obj.place]
+            });
+
+            // TODO: add points for correct answers
+        }else{ // wrong tile is clicked
+            setCFG({
+                ...cfg,
+                wrong_clicked: [...cfg.wrong_clicked, obj.place]
+            });
+            // TODO: remove live
+            // TODO: remove points
+        }
+    }
+
+    // TODO: make use effect for live change, and when its 0 game over
+
     useEffect(calculate_cfg, [level]);
     useEffect(() => console.log('cfg', cfg), [cfg]);
     
@@ -83,9 +106,9 @@ export default function Game() {
                 <div className={`${main.accent} flex gap-2 text-center justify-center`}>
                     {Array.from({ length: 3 }, (x, i) => {
                         if(i >= lives){
-                            return <IconHeartFilled className="opacity-40" size={44}/>;
+                            return <IconHeartFilled key={v4()} className="opacity-40" size={44}/>;
                         }
-                        return <IconHeartFilled size={44}/>;
+                        return <IconHeartFilled key={v4()} size={44}/>;
                     })}
                 </div>
 
@@ -98,8 +121,15 @@ export default function Game() {
                             {Array.from({ length: cfg.layout }, (q, j) => {
                                 // Calculation for a game tile
                                 const tile_place = return_tile_place(j, i, cfg.layout);
-
-                                return <GameTile showAnim={showAnim} right={(cfg.right_tiles_places.includes(tile_place)) ? true : false} key={`${i}-${j}`}/>;
+                                
+                                return <GameTile 
+                                    clicked={(cfg.right_clicked.includes(tile_place) || cfg.wrong_clicked.includes(tile_place))}
+                                    onClick={tileClickHandler} 
+                                    place={tile_place} 
+                                    showAnim={showAnim} 
+                                    right={(cfg.right_tiles_places.includes(tile_place)) ? true : false} 
+                                    key={`${i}-${j}`}
+                                />;
                             })}
                         </div>
                     );
