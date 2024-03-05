@@ -1,4 +1,4 @@
-import { IconHeart, IconHeartFilled, IconLayoutDistributeVertical } from "@tabler/icons-react";
+import { IconHeartFilled } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import s from '@/Components/scss/game.module.css';
 import main from '@/Components/scss/components.module.css';
@@ -125,6 +125,16 @@ export default function Game() {
         if(has_user_lost()){
             reset_game();
 
+            axios.post(route('gameover'), {
+                level: level,
+                points: points
+            }).then((res) => {
+                if(res.success){ // successfully saved data to the database
+                    let data = res.response;
+                }
+            }).catch((err) => {
+                console.error(err);
+            });
             // TODO: show score (maybe modal)
             // TODO: has to make post to the backend and submit result
         }

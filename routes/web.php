@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,7 @@ Route::middleware('auth')->group(function(){
 });
 
 
-
+Route::post('/gameover', [HistoryController::class, 'game_over'])->name('gameover');
 
 
 Route::middleware('auth')->group(function () {
