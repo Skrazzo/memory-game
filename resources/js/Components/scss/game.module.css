@@ -40,6 +40,8 @@
     &:hover{
         background-color: var(--accent);
     }
+
+    animation: tile-click 200ms ease-in-out;
 }
 
 .wrong_clicked{
@@ -47,6 +49,7 @@
     &:hover{
         background-color: var(--background);
     }
+    animation: tile-click 200ms ease-in-out;
 }
 
 @keyframes right_anim {
@@ -68,7 +71,9 @@
 }
 
 @keyframes tile-click{
-
+    50%{
+        scale: 0.9;
+    }
 }
 
 @keyframes tile-appear {

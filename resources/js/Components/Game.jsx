@@ -38,6 +38,7 @@ export default function Game() {
         return ((layout * y) + (1 * x)) + 1;
     }
 
+    useEffect(calculate_cfg, [level]);
     function calculate_cfg(){
         if(!mounted) {
             level_up();
@@ -58,6 +59,8 @@ export default function Game() {
         setCFG({
             ...cfg,
             ...newCFG,
+            right_clicked: [],
+            wrong_clicked: [],
             right_tiles_places: generate_rand_tiles((newCFG.layout * newCFG.layout), newCFG.right_tiles),
         });
 
@@ -70,6 +73,12 @@ export default function Game() {
 
     function level_up(){
         setLevel(level + 1);
+        // TODO: cfg needs to be resetted before new level
+    }
+
+    function has_user_won(){
+        if(cfg.right_clicked.length >= cfg.right_tiles) return true;
+        return false;
     }
 
     function tileClickHandler(obj){
@@ -95,8 +104,14 @@ export default function Game() {
 
     // TODO: make use effect for live change, and when its 0 game over
 
-    useEffect(calculate_cfg, [level]);
-    useEffect(() => console.log('cfg', cfg), [cfg]);
+
+    useEffect(() => {
+        if(has_user_won()){
+            level_up();
+        }
+
+        console.log('cfg', cfg);
+    }, [cfg]);
     
 
     return (
