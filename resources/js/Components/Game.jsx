@@ -4,6 +4,8 @@ import s from '@/Components/scss/game.module.css';
 import main from '@/Components/scss/components.module.css';
 import GameTile from "./GameTile";
 import { v4 } from "uuid";
+import Modal from "./Modal";
+import axios from "axios";
 
 
 
@@ -12,6 +14,7 @@ export default function Game() {
     const [mounted, setMounted] = useState(false);
     const [showAnim, setShowAnim] = useState(false);
     const [points, setPoints] = useState(0);
+    const [gameOverModal, setGameOverModal] = useState(false);
 
     // function to generate random right tile positions
     function generate_rand_tiles(x, count) {
@@ -74,7 +77,6 @@ export default function Game() {
 
     function level_up(){
         setLevel(level + 1);
-        // TODO: cfg needs to be resetted before new level
     }
 
     function has_user_won(){
@@ -89,6 +91,7 @@ export default function Game() {
 
     function reset_game(){
         setLevel(0);
+        setPoints(0);
     }
 
     function tileClickHandler(obj){
@@ -101,19 +104,17 @@ export default function Game() {
                 right_clicked: [...cfg.right_clicked, obj.place]
             });
 
-            // TODO: add points for correct answers
+            setPoints(points + (2 * level));
         }else{ // wrong tile is clicked
             setCFG({
                 ...cfg,
                 wrong_clicked: [...cfg.wrong_clicked, obj.place],
                 lives: cfg.lives - 1
             });
-            // TODO: remove points
+
+            setPoints(points - (1 * level));
         }
     }
-
-    // TODO: make use effect for live change, and when its 0 game over
-
 
 
     useEffect(() => {
@@ -123,8 +124,8 @@ export default function Game() {
 
         if(has_user_lost()){
             reset_game();
+
             // TODO: show score (maybe modal)
-            // TODO: reset score
             // TODO: has to make post to the backend and submit result
         }
 
@@ -134,6 +135,8 @@ export default function Game() {
 
     return (
         <div>
+            
+
             <div className="text-center py-4">
                 <p className="text-xl">Level <strong className={`${main.accent}`}>{level}</strong> - <strong className={`${main.accent}`}>{points}</strong> points</p>
                 <div className={`${main.accent} flex gap-2 text-center justify-center`}>
