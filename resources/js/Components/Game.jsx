@@ -14,7 +14,7 @@ export default function Game() {
     const [mounted, setMounted] = useState(false);
     const [showAnim, setShowAnim] = useState(false);
     const [points, setPoints] = useState(0);
-    const [gameOverModal, setGameOverModal] = useState(false);
+    const [gameOverModal, setGameOverModal] = useState({ resData: {}, show: false });
 
     // function to generate random right tile positions
     function generate_rand_tiles(x, count) {
@@ -129,17 +129,17 @@ export default function Game() {
                 level: level,
                 points: points
             }).then((res) => {
-                if(res.success){ // successfully saved data to the database
-                    let data = res.response;
+                if(res.data.success){ // successfully saved data to the database
+                    let data = res.data.response;
+                    console.log(data);
                 }
+                
             }).catch((err) => {
                 console.error(err);
             });
-            // TODO: show score (maybe modal)
-            // TODO: has to make post to the backend and submit result
         }
 
-        console.log('cfg', cfg);
+        //console.log('cfg', cfg);
     }, [cfg]);
     
 

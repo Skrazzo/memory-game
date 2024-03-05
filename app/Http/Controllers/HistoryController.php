@@ -29,11 +29,12 @@ class HistoryController extends Controller
                 $res_arr = [
                     'new_best' => false,
                     'best' => $user_best, // either its users best, or old best record, depends on new_best
-                    'average_points' => $user->history()->avg('points'),
-                    'game_count' => $user->history()->count()
+                    'average_points' => round($user->history()->avg('points'), 2),
+                    'game_count' => $user->history()->count(),
+                    'current_game' => $data
                 ];
                 
-                if($data['points'] > $user_best['points']){ // new personal best
+                if($data['points'] == $user_best['points']){ // new personal best
                     $res_arr['new_best'] = true;
                 }
                 
