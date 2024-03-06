@@ -24,8 +24,7 @@
 
     transition: 250ms;
     &:hover{
-        background-color: var(--form-background-lighter);
-        background-color: var(--background);
+        background-color: var(--form-background);
     }
 
     animation: ease-out 250ms forwards tile-appear;
@@ -45,10 +44,7 @@
 }
 
 .wrong_clicked{
-    background-color: var(--background);
-    &:hover{
-        background-color: var(--background);
-    }
+    background-color: var(--form-background);
     animation: tile-click 200ms ease-in-out;
 }
 

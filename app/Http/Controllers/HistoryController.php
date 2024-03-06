@@ -20,8 +20,8 @@ class HistoryController extends Controller
         } else {
             $data = $val->valid();
             $user = $req->user();
-
-            if($user->history()->create($data)){
+            $new_record = $user->history()->create($data);
+            if($new_record){
                 $res['success'] = true;
                 
                 $user_best = $user->history()->orderBy('points', 'DESC')->first(); // get users best result
@@ -39,6 +39,9 @@ class HistoryController extends Controller
                 }
                 
                 $res['response'] = $res_arr;
+
+                // if record is on level one the delete it
+                if($new_record->level == 1) $new_record->delete();
             }
         }
         

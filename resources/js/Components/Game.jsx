@@ -6,6 +6,7 @@ import GameTile from "./GameTile";
 import { v4 } from "uuid";
 import Modal from "./Modal";
 import axios from "axios";
+import GameOverModal from "./GameOverModal";
 
 
 
@@ -14,7 +15,7 @@ export default function Game() {
     const [mounted, setMounted] = useState(false);
     const [showAnim, setShowAnim] = useState(false);
     const [points, setPoints] = useState(0);
-    const [gameOverModal, setGameOverModal] = useState({ resData: {}, show: false });
+    const [gameOverModal, setGameOverModal] = useState({ resData: {}, show: true });
 
     // function to generate random right tile positions
     function generate_rand_tiles(x, count) {
@@ -131,7 +132,10 @@ export default function Game() {
             }).then((res) => {
                 if(res.data.success){ // successfully saved data to the database
                     let data = res.data.response;
-                    console.log(data);
+                    setGameOverModal({
+                        resData: data,
+                        show: true
+                    });
                 }
                 
             }).catch((err) => {
@@ -145,10 +149,12 @@ export default function Game() {
 
     return (
         <div>
-            
+            <Modal show={gameOverModal.show}>
+                <GameOverModal resData={gameOverModal.resData} />
+            </Modal>
 
             <div className="text-center py-4">
-                <p className="text-xl">Level <strong className={`${main.accent}`}>{level}</strong> - <strong className={`${main.accent}`}>{points}</strong> points</p>
+                <p className={`${main.secondary_text} text-xl`}>Level <strong className={`${main.accent}`}>{level}</strong> - <strong className={`${main.accent}`}>{points}</strong> points</p>
                 <div className={`${main.accent} flex gap-2 text-center justify-center`}>
                     {Array.from({ length: 3 }, (x, i) => {
                         if(i >= cfg.lives){
