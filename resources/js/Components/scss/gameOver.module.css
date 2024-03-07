@@ -1,0 +1,112 @@
+:root{
+    --l1: 1s;
+    --l2: 1.5s;
+    --l3: 2s;
+}
+
+.mainLogo{
+    animation: mainLogo var(--l1) forwards ease-out;
+}
+
+@keyframes mainLogo {
+    0%{
+        opacity: 0;
+        scale: 1.5;
+
+        transform: translateY(50px);
+    }
+
+    20%{
+        scale: 1.5;
+        transform: translateY(50px);
+    }
+
+    40%{
+        opacity: 1;
+        scale: 1.5;
+        transform: translateY(50px);
+    }
+
+    70%{
+        scale: 1.5;
+        transform: translateY(50px);
+
+    }
+
+    95%{
+        scale: 1;
+    }
+}
+
+.mainText{
+    animation: mainText var(--l1) forwards ease-out;
+}
+
+@keyframes mainText {
+    0%{
+        opacity: 0;
+        transform: translateY(50px);
+    }
+
+    50%{
+        transform: translateY(50px);
+    }
+
+    70%{
+        opacity: 0;
+    }
+}
+
+.button{
+    animation: button var(--l2) forwards ease-out;
+}
+
+@keyframes button {
+    0%{
+        transform: translateY(50px);
+        opacity: 0;
+    }
+
+    40%{
+        transform: translateY(50px);
+    }
+
+    70%{
+        opacity: 0;
+    }
+}
+
+
+.score_container{
+    animation: score_container var(--l3) forwards ease-out;
+}
+
+@keyframes score_container {
+    0%{
+        opacity: 0;
+    }
+
+    70%{
+        opacity: 0;
+    }
+
+    100%{
+
+    }
+}
+
+/*
+.mainLogo{
+    animation: mainLogo var(--l1) forwards ease-out;
+}
+
+@keyframes mainLogo {
+    0%{
+
+    }
+
+    100%{
+
+    }
+}
+*/

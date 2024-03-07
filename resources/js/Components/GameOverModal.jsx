@@ -1,29 +1,31 @@
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import main from '@/Components/scss/components.module.css';
 import game from '@/Components/scss/game.module.css';
+import over from '@/Components/scss/gameOver.module.css';
 import { IconCircleChevronsUp, IconDeviceGamepad, IconSkull, IconTargetArrow, IconTrophy } from "@tabler/icons-react";
 
 
 export default function GameOverModal({ resData, onPlay }) {
-    
-    
+    const [score, setScore] = useState(0);
+
+ 
     return (
         <div className={`${main.background} min-h-96 relative p-4`}>
             <div className={`${main.accent} absolute text-2xl italic font-semibold`}># {resData.game_count}</div>
             
             {(resData.new_best) 
-                ? <IconTrophy size={100} strokeWidth={0.75} className={`${main.accent} mx-auto`} /> // TODO: make it shake
-                : <IconSkull size={100} strokeWidth={0.75} className={`${main.accent} mx-auto`}/>
+                ? <IconTrophy size={100} strokeWidth={0.75} className={`${main.accent} ${over.mainLogo} mx-auto`} /> // TODO: make it shake
+                : <IconSkull size={100} strokeWidth={0.75} className={`${main.accent} ${over.mainLogo} mx-auto`}/>
             }
             
-            <p className={`${main.accent} text-center text-3xl font-black tracking-wide`}>{(resData.new_best) ? "NEW PERSONAL BEST" : "GAME OVER"}</p>
+            <p className={`${main.accent} ${over.mainText} text-center text-3xl font-black tracking-wide`}>{(resData.new_best) ? "NEW PERSONAL BEST" : "GAME OVER"}</p>
             
             <div className="flex justify-center mt-4 mb-6">
-                <button className={`${game.game_over_button} relative z-10`} onClick={onPlay}>play again</button>
+                <button className={`${game.game_over_button} ${over.button} relative z-10`} onClick={onPlay}>play again</button>
             </div>
             
             <div className="relative z-10 mx-4 sm:mx-24 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className={`${game.game_score_container}`}>
+                <div className={`${game.game_score_container} ${over.score_container}`}>
                     <div className="flex flex-col gap-2 justify-center p-3">
                         <div className="flex items-center gap-1 text-lg"><IconTargetArrow size={34} strokeWidth={1.5} className={`${main.accent}`} /> <span className={`${main.secondary_text}`}>{resData.current_game.points}</span></div>
                         <div className="flex items-center gap-1 text-lg"><IconCircleChevronsUp size={34} strokeWidth={1.5} className={`${main.accent}`} /> <span className={`${main.secondary_text}`}>{resData.current_game.level}</span></div>
@@ -38,7 +40,7 @@ export default function GameOverModal({ resData, onPlay }) {
                     </div>
                 </div>
 
-                <div className={`${game.game_score_container}`}>
+                <div className={`${game.game_score_container} ${over.score_container}`}>
                     <div className="flex flex-col gap-2 justify-center p-3">
                         <div className="flex items-center gap-1 text-lg"><IconTargetArrow size={34} strokeWidth={1.5} className={`${main.accent}`} /> <span className={`${main.secondary_text}`}>{resData.best.points}</span></div>
                         <div className="flex items-center gap-1 text-lg"><IconCircleChevronsUp size={34} strokeWidth={1.5} className={`${main.accent}`} /> <span className={`${main.secondary_text}`}>{resData.best.level}</span></div>
