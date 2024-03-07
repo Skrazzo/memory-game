@@ -6,6 +6,10 @@
     fill: var(--accent);
 }
 
+.background_color{
+    color: var(--background);
+}
+
 .background{
     background-color: var(--background);
 }

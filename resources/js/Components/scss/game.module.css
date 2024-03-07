@@ -34,6 +34,20 @@
     }
 }
 
+.game_score_container{
+    border-radius: 4px;
+    overflow: hidden;
+
+    position: relative;
+    background-color: var(--form-background-opacity);
+    backdrop-filter: blur(4px);
+    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.35);
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    
+
+}
 
 
 .tile{
