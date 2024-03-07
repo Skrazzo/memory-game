@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react"
 import main from '@/Components/scss/components.module.css';
 import game from '@/Components/scss/game.module.css';
 import over from '@/Components/scss/gameOver.module.css';
 import { IconCircleChevronsUp, IconDeviceGamepad, IconSkull, IconTargetArrow, IconTrophy } from "@tabler/icons-react";
+import Confetti from 'react-confetti'
 
 
 export default function GameOverModal({ resData, onPlay }) {
-    const [score, setScore] = useState(0);
-
  
     return (
         <div className={`${main.background} min-h-96 relative p-4`}>
+            {resData.new_best && <Confetti numberOfPieces={400} recycle={false} />}
             <div className={`${main.accent} absolute text-2xl italic font-semibold`}># {resData.game_count}</div>
             
             {(resData.new_best) 

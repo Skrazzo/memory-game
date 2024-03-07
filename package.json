@@ -23,6 +23,7 @@
     "dependencies": {
         "@custom-react-hooks/use-media-query": "^1.4.19",
         "@tabler/icons-react": "^2.47.0",
+        "react-confetti": "^6.1.0",
         "sass": "^1.71.1",
         "uuid": "^9.0.1"
     }
