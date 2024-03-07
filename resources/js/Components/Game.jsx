@@ -15,7 +15,7 @@ export default function Game() {
     const [mounted, setMounted] = useState(false);
     const [showAnim, setShowAnim] = useState(false);
     const [points, setPoints] = useState(0);
-    const [gameOverModal, setGameOverModal] = useState({ resData: {}, show: true });
+    const [gameOverModal, setGameOverModal] = useState({ resData: {}, show: false });
 
     // function to generate random right tile positions
     function generate_rand_tiles(x, count) {
