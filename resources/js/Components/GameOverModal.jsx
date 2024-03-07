@@ -4,20 +4,20 @@ import game from '@/Components/scss/game.module.css';
 import { IconCircleChevronsUp, IconDeviceGamepad, IconSkull, IconTrophy } from "@tabler/icons-react";
 
 
-export default function GameOverModal({ resData }) {
+export default function GameOverModal({ resData, onPlay }) {
     useEffect(() => console.log(resData), [resData]);
     
     return (
         <div className={`${main.background} min-h-96 relative p-4`}>
-            <div className={`${main.accent} absolute text-2xl italic font-semibold`}># 5</div>
+            <div className={`${main.accent} absolute text-2xl italic font-semibold`}># {resData.game_count}</div>
             <IconSkull size={100} strokeWidth={0.75} className={`${main.accent} mx-auto`}/>
             <p className={`${main.accent} text-center text-3xl font-black tracking-wide`}>GAME OVER</p>
             
             <div className="flex justify-center mt-4 mb-6">
-                <button className={`${game.game_over_button} relative z-10`} onClick={() => console.log('asd')}>play again</button>
+                <button className={`${game.game_over_button} relative z-10`} onClick={onPlay}>play again</button>
             </div>
             
-            <div className="relative z-10 mx-24 grid grid-cols-2 gap-6">
+            <div className="relative z-10 mx-4 sm:mx-24 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className={`${game.game_score_container}`}>
                     <div className="flex flex-col gap-2 justify-center p-3">
                         <div className="flex items-center gap-1 text-lg"><IconTrophy size={34} strokeWidth={1.5} className={`${main.accent}`} /> <span className={`${main.secondary_text}`}>{resData.current_game.points}</span></div>

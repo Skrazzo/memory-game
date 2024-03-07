@@ -117,6 +117,10 @@ export default function Game() {
         }
     }
 
+    function playAgainHandler(){
+        setGameOverModal({...gameOverModal, show: false});
+        reset_game();
+    }
 
     useEffect(() => {
         if(has_user_won()){
@@ -124,7 +128,7 @@ export default function Game() {
         }
 
         if(has_user_lost()){
-            reset_game();
+            
 
             axios.post(route('gameover'), {
                 level: level,
@@ -150,7 +154,7 @@ export default function Game() {
     return (
         <div>
             <Modal show={gameOverModal.show}>
-                <GameOverModal resData={gameOverModal.resData} />
+                <GameOverModal onPlay={playAgainHandler} resData={gameOverModal.resData} />
             </Modal>
 
             <div className="text-center py-4">
