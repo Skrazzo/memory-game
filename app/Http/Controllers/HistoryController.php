@@ -71,7 +71,7 @@ class HistoryController extends Controller
 
                 $response['response'] = $response_arr;
 
-                if ($response_arr['game_count'] % 5 == 0) {
+                if ($response_arr['game_count'] % 2 == 0) {
                     $user->average()->create(['score' => round($user->history()->avg('points'), 2)]);
                 }
 

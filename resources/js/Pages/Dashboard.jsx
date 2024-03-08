@@ -6,6 +6,7 @@ import { Chart as ChartJS } from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 
+
 export default function Dashboard({ auth, chart }) {
     const [colors, setColors] = useState({});
 
@@ -31,7 +32,8 @@ export default function Dashboard({ auth, chart }) {
 
         // Create an object with the 'accent' property and assign it the value of the '--accent' custom property
         const arr = {
-            accent: styles.getPropertyValue('--accent')
+            accent: styles.getPropertyValue('--accent'),
+            accent_darker: styles.getPropertyValue('--accent-darker'),
         };
 
         // Set the 'colors' state to a new object containing the properties of 'arr'
@@ -45,10 +47,10 @@ export default function Dashboard({ auth, chart }) {
         >
             <Head title="Dashboard" />
 
-            <div className={`${s.form} my-12 max-w-7xl md:mx-4 md:rounded-lg xl:mx-auto sm:px-6 lg:px-8`}>
+            <div className={`${s.form} my-12 max-w-6xl md:mx-4 md:rounded-lg xl:mx-auto `}>
             <Line
                 style={{
-                    height: '100px',
+                    height: '200px',
                     width: '100%',
                 }}
                 datasetIdKey='id'
@@ -71,6 +73,20 @@ export default function Dashboard({ auth, chart }) {
                     },
                     plugins: {
                         legend: {
+                            display: false,
+                        }
+                    },
+                    maintainAspectRatio: false,
+                    pointRadius: 2,
+                    pointBackgroundColor: `${colors.accent_darker}`,
+                    scales: {
+                        x: {
+                            grid: {
+                                color: 'black',
+                            },
+                            display: false,
+                        },
+                        y: {
                             display: false,
                         }
                     }

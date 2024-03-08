@@ -7,7 +7,7 @@ import { v4 } from "uuid";
 import Modal from "./Modal";
 import axios from "axios";
 import GameOverModal from "./GameOverModal";
-
+import clickSoundWav from '@/click.wav';
 
 
 export default function Game() {
@@ -16,6 +16,7 @@ export default function Game() {
     const [showAnim, setShowAnim] = useState(false);
     const [points, setPoints] = useState(0);
     const [gameOverModal, setGameOverModal] = useState({ resData: {}, show: false });
+    const [clickSound] = useSound(clickSoundWav);
 
     // function to generate random right tile positions
     function generate_rand_tiles(x, count) {
@@ -96,6 +97,8 @@ export default function Game() {
     }
 
     function tileClickHandler(obj){
+        new Audio(clickSoundWav).play();
+
         if(cfg.right_clicked.includes(obj.place)) return;
         if(cfg.wrong_clicked.includes(obj.place)) return;
         
