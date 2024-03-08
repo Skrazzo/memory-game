@@ -18,9 +18,7 @@ use Inertia\Inertia;
 */
 
 Route::middleware('auth')->group(function(){
-    Route::get('/', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    Route::get('/', [HistoryController::class, 'dashboard_index'])->name('dashboard');
     
     Route::get('/play', function () {
         return Inertia::render('Play');
