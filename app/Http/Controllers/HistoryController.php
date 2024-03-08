@@ -29,7 +29,6 @@ class HistoryController extends Controller
                 $res_arr = [
                     'new_best' => false,
                     'best' => $user_best, // either its users best, or old best record, depends on new_best
-                    'average_points' => round($user->history()->avg('points'), 2),
                     'game_count' => $user->history()->count(),
                     'current_game' => $data
                 ];
@@ -39,6 +38,11 @@ class HistoryController extends Controller
                 }
                 
                 $res['response'] = $res_arr;
+
+                // if this is 10th game we need to make average score record
+                if($res_arr['game_count'] % 10 == 0){
+                    $user->average()->create(['score' => round($user->history()->avg('points'), 2)]);
+                }
 
                 // if record is on level one the delete it
                 if($new_record->level == 1) $new_record->delete();

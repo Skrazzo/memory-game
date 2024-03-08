@@ -46,4 +46,8 @@ class User extends Authenticatable
     public function history(){
         return $this->hasMany(\App\Models\History::class);
     }
+
+    public function average(){
+        return $this->hasMany(\App\Models\AverageScores::class);
+    }
 }
