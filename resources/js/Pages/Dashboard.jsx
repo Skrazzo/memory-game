@@ -34,8 +34,9 @@ export default function Dashboard({ auth, chart }) {
         const arr = {
             accent: styles.getPropertyValue('--accent'),
             accent_darker: styles.getPropertyValue('--accent-darker'),
+            form_opacity: styles.getPropertyValue('--form-background-opacity'),
         };
-
+        
         // Set the 'colors' state to a new object containing the properties of 'arr'
         setColors({...arr});
     }
@@ -47,7 +48,7 @@ export default function Dashboard({ auth, chart }) {
         >
             <Head title="Dashboard" />
 
-            <div className={`${s.form} my-12 max-w-6xl md:mx-4 md:rounded-lg xl:mx-auto `}>
+            <div className={`${s.form} my-12 max-w-6xl md:mx-4 md:rounded-lg xl:mx-auto sm:p-2 lg:p-4`}>
             <Line
                 style={{
                     height: '200px',
@@ -58,9 +59,10 @@ export default function Dashboard({ auth, chart }) {
                     labels: chart.labels,
                     datasets: [
                         {
+                            fill: true,
                             data: chart.data,
-                            backgroundColor: `${colors.accent}`,
-                            borderColor: `${colors.accent}`,
+                            backgroundColor: `${colors.form_opacity}`,
+                            borderColor: `${colors.accent_darker}`,
                         },
                     ],
                     
@@ -70,20 +72,19 @@ export default function Dashboard({ auth, chart }) {
                         line: {
                             tension: 0.3,
                         },
+                        
                     },
                     plugins: {
                         legend: {
                             display: false,
-                        }
+                        },
+                        
                     },
                     maintainAspectRatio: false,
                     pointRadius: 2,
                     pointBackgroundColor: `${colors.accent_darker}`,
                     scales: {
                         x: {
-                            grid: {
-                                color: 'black',
-                            },
                             display: false,
                         },
                         y: {

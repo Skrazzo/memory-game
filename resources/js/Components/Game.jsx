@@ -16,7 +16,6 @@ export default function Game() {
     const [showAnim, setShowAnim] = useState(false);
     const [points, setPoints] = useState(0);
     const [gameOverModal, setGameOverModal] = useState({ resData: {}, show: false });
-    const [clickSound] = useSound(clickSoundWav);
 
     // function to generate random right tile positions
     function generate_rand_tiles(x, count) {
