@@ -71,7 +71,7 @@ export default function Dashboard({ auth, chart }) {
             <div className={`my-12 max-w-6xl md:mx-4 md:rounded-lg xl:mx-auto sm:p-2 lg:p-4`}>
             <Line
                 style={{
-                    height: '200px',
+                    height: '150px',
                     width: '100%',
                 }}
                 datasetIdKey='id'
@@ -83,14 +83,12 @@ export default function Dashboard({ auth, chart }) {
                             data: chart.data,
                             backgroundColor: (context) => { 
                                 const bgColor = [
-                                    (colors.accent) ? convertHex(colors.accent, 0.8) : '#FFFFFF',
-                                    (colors.accent) ? convertHex(colors.accent, 0.4) : '#FFFFFF',
+                                    (colors.accent) ? convertHex(colors.accent, 0.7) : '#FFFFFF',
+                                    (colors.accent) ? convertHex(colors.accent, 0.35) : '#FFFFFF',
                                     (colors.accent) ? convertHex(colors.accent, 0.1) : '#FFFFFF',
                                     (colors.accent) ? convertHex(colors.accent, 0) : '#FFFFFF',
                                 ];
 
-                                console.log(bgColor);
-                            
                                 if(!context.chart.chartArea) {
                                     return;
                                 }
@@ -133,8 +131,10 @@ export default function Dashboard({ auth, chart }) {
                         y: {
                             
                             display: false,
-                            min: 900,
+                            min: Math.min(...chart.data) - 100,
                         }
+
+                        
                     }
                     
                 }}
