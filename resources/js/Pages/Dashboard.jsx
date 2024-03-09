@@ -35,6 +35,7 @@ export default function Dashboard({ auth, chart }) {
             accent: styles.getPropertyValue('--accent'),
             accent_darker: styles.getPropertyValue('--accent-darker'),
             form_opacity: styles.getPropertyValue('--form-background-opacity'),
+            background: styles.getPropertyValue('--background'),
         };
         
         // Set the 'colors' state to a new object containing the properties of 'arr'
@@ -48,7 +49,7 @@ export default function Dashboard({ auth, chart }) {
         >
             <Head title="Dashboard" />
 
-            <div className={`${s.form} my-12 max-w-6xl md:mx-4 md:rounded-lg xl:mx-auto sm:p-2 lg:p-4`}>
+            <div className={`my-12 max-w-6xl md:mx-4 md:rounded-lg xl:mx-auto sm:p-2 lg:p-4`}>
             <Line
                 style={{
                     height: '200px',
@@ -61,7 +62,27 @@ export default function Dashboard({ auth, chart }) {
                         {
                             fill: true,
                             data: chart.data,
-                            backgroundColor: `${colors.form_opacity}`,
+                            backgroundColor: (context) => { 
+                                const bgColor = [
+                                    (colors.accent) ? colors.accent : '#FFFFFF',
+                                    (colors.accent_darker) ? colors.accent_darker : '#FFFFFF',
+                                    (colors.background) ? colors.background : '#FFFFFF',
+                                ];
+
+                                console.log(bgColor);
+                            
+                                if(!context.chart.chartArea) {
+                                    return;
+                                }
+
+                                const { ctx, data, chartArea: {top, bottom} } = context.chart; 
+                                const gradientBg = ctx.createLinearGradient(0, top, 0, bottom); 
+                                gradientBg.addColorStop(0.3, bgColor[0])
+                                gradientBg.addColorStop(0.9, bgColor[1])
+                                gradientBg.addColorStop(1, bgColor[2])
+                                
+                                return gradientBg;
+                            },
                             borderColor: `${colors.accent_darker}`,
                         },
                     ],
@@ -72,6 +93,7 @@ export default function Dashboard({ auth, chart }) {
                         line: {
                             tension: 0.3,
                         },
+                        
                         
                     },
                     plugins: {
@@ -89,6 +111,7 @@ export default function Dashboard({ auth, chart }) {
                         },
                         y: {
                             display: false,
+                            min: 900,
                         }
                     }
                     
