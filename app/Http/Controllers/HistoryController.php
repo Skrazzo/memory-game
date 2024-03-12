@@ -60,7 +60,7 @@ class HistoryController extends Controller
                 'user_best' => $user_best,
                 'leaderboard_place' => $user_place,
             ],
-            'history' => $user->history()->select('points', 'level', 'created_at')->orderBy('created_at', 'desc')->simplePaginate(20)
+            'history' => $user->history()->select('points', 'level', 'created_at')->orderBy('created_at', 'desc')->simplePaginate(16)
         ]);
     }
 

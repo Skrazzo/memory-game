@@ -149,3 +149,10 @@
     }
 }
 
+.icon_btn{
+    color: var(--primary-text);
+    & :hover{
+        color: var(--accent);
+    }
+}
+

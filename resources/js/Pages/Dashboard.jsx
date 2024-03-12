@@ -1,13 +1,16 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import s from '@/Components/scss/components.module.css';
-import main from '@/Components/scss/dashboard.module.css';
+//import main from '@/Components/scss/dashboard.module.css';
 
 import { useEffect, useState } from 'react';
 import Chart from '@/Components/Chart';
 import NoChart from '@/Components/NoChart';
-import { IconCircleChevronsUp, IconDeviceGamepad2, IconLayoutList, IconTargetArrow, IconTrophy } from '@tabler/icons-react';
+import { IconDeviceGamepad2, IconLayoutList, IconTargetArrow, IconTrophy } from '@tabler/icons-react';
 import useMediaQuery from '@custom-react-hooks/use-media-query';
+import DashboardHistoryContainer from '@/Components/DashboardHistoryContainer';
+import { v4 } from 'uuid';
+import Paginator from '@/Components/Paginator';
 
 
 export default function Dashboard({ auth, chart, stats, history }) {
@@ -52,10 +55,7 @@ export default function Dashboard({ auth, chart, stats, history }) {
         strokeWidth: 1.5,
     };
 
-    const history_icon_props = {
-        size: (sm) ? 30 : 44, 
-        strokeWidth: (sm) ? 1 : 1.5
-    };
+    
 
     return (
         <AuthenticatedLayout
@@ -91,42 +91,12 @@ export default function Dashboard({ auth, chart, stats, history }) {
                 </div>
 
                 <div className='mt-6 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4'>
-                    <article className={main.history_container}>
-                        <div className={s.primary_text}>
-                            <div>
-                                <IconTargetArrow {...history_icon_props}/>
-                                <strong>1071</strong>
-                            </div>
-
-                            <div>
-                                <IconCircleChevronsUp {...history_icon_props}/>
-                                <strong>11</strong>
-                            </div>
-                        </div>
-
-                        <span className={`${s.secondary_text} italic text-center`}>2024-03-12 14:45</span>
-                    </article>
-
-                    <article className={main.history_container}>
-                        <div className={s.primary_text}>
-                            <div>
-                                <IconTargetArrow {...history_icon_props}/>
-                                <strong>1071</strong>
-                            </div>
-
-                            <div>
-                                <IconCircleChevronsUp {...history_icon_props}/>
-                                <strong>11</strong>
-                            </div>
-                        </div>
-
-                        <span className={`${s.secondary_text} italic text-center`}>2024-03-12 14:45</span>
-                        
-                        <div className={main.history_hover}>
-                            
-                        </div>
-                    </article>
+                    {history.data.map((x) => {
+                        return <DashboardHistoryContainer key={v4()} {...x}/>;
+                    })}
                 </div>
+
+                <Paginator {...history} className='mt-6'/>
             </div>
         </AuthenticatedLayout>
     );
