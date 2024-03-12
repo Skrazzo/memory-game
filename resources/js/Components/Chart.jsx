@@ -22,75 +22,76 @@ export default function Chart({ colors, chart, height = '150px', width = '100%' 
     }
     
     return (
-        <Line
-            style={{
-                height: height,
-                width: width,
-            }}
-            datasetIdKey='id'
-            data={{
-                labels: chart.labels,
-                datasets: [
-                    {
-                        fill: true,
-                        data: chart.data,
-                        backgroundColor: (context) => { 
-                            const bgColor = [
-                                (colors.accent) ? convertHex(colors.accent, 0.7) : '#FFFFFF',
-                                (colors.accent) ? convertHex(colors.accent, 0.3) : '#FFFFFF',
-                                (colors.accent) ? convertHex(colors.accent, 0.05) : '#FFFFFF',
-                                (colors.accent) ? convertHex(colors.accent, 0) : '#FFFFFF',
-                            ];
+        <div>
 
-                            if(!context.chart.chartArea) {
-                                return;
-                            }
-
-                            const { ctx, data, chartArea: {top, bottom} } = context.chart; 
-                            const gradientBg = ctx.createLinearGradient(0, top, 0, bottom); 
-                            gradientBg.addColorStop(0.3, bgColor[0])
-                            gradientBg.addColorStop(0.6, bgColor[1])
-                            gradientBg.addColorStop(0.9, bgColor[2])
-                            gradientBg.addColorStop(1, bgColor[3])
-                            
-                            return gradientBg;
+            <Line
+                style={{
+                    height: height,
+                    width: width,
+                }}
+                datasetIdKey='id'
+                data={{
+                    labels: chart.labels,
+                    datasets: [
+                        {
+                            fill: true,
+                            data: chart.data,
+                            backgroundColor: (context) => { 
+                                const bgColor = [
+                                    (colors.accent) ? convertHex(colors.accent, 0.7) : '#FFFFFF',
+                                    (colors.accent) ? convertHex(colors.accent, 0.3) : '#FFFFFF',
+                                    (colors.accent) ? convertHex(colors.accent, 0.05) : '#FFFFFF',
+                                    (colors.accent) ? convertHex(colors.accent, 0) : '#FFFFFF',
+                                ];
+    
+                                if(!context.chart.chartArea) {
+                                    return;
+                                }
+    
+                                const { ctx, data, chartArea: {top, bottom} } = context.chart; 
+                                const gradientBg = ctx.createLinearGradient(0, top, 0, bottom); 
+                                gradientBg.addColorStop(0.3, bgColor[0])
+                                gradientBg.addColorStop(0.6, bgColor[1])
+                                gradientBg.addColorStop(0.9, bgColor[2])
+                                gradientBg.addColorStop(1, bgColor[3])
+                                
+                                return gradientBg;
+                            },
+                            borderColor: `${colors.accent_darker}`,
                         },
-                        borderColor: `${colors.accent_darker}`,
-                    },
-                ],
-                
-            }}
-            options={{
-                elements: {
-                    line: {
-                        tension: 0.3,
-                    },
+                    ],
                     
-                    
-                },
-                plugins: {
-                    legend: {
-                        display: false,
-                    },
-                    
-                },
-                maintainAspectRatio: false,
-                pointRadius: 2,
-                pointBackgroundColor: `${colors.accent_darker}`,
-                scales: {
-                    x: {
-                        display: false,
-                    },
-                    y: {
+                }}
+                options={{
+                    elements: {
+                        line: {
+                            tension: 0.3,
+                        },
                         
-                        display: false,
-                        min: Math.min(...chart.data) - 100,
+                        
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        },
+                        
+                    },
+                    maintainAspectRatio: false,
+                    pointRadius: 2,
+                    pointBackgroundColor: `${colors.accent_darker}`,
+                    scales: {
+                        x: {
+                            display: false,
+                        },
+                        y: {
+                            
+                            display: false,
+                            min: Math.min(...chart.data) - 100,
+                        }
                     }
-
                     
-                }
-                
-            }}
-        />
+                }}
+            />
+        </div>
     )
 }

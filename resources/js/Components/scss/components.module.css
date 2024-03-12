@@ -23,6 +23,10 @@
     background-color: var(--form-background-opacity);
 }
 
+.form_accent{
+    background-color: var(--accent);
+}
+
 .form_light{
     background-color: var(--form-background-lighter);
 }

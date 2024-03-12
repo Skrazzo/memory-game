@@ -50,7 +50,7 @@ class HistoryController extends Controller
             'chart' => $avg_history,
             'stats' => [
                 'games_played' => $user->history()->count(),
-                'average_points' => $user->history()->avg('points'),
+                'average_points' => round($user->history()->avg('points'), 1),
                 'user_best' => $user_best,
                 'leaderboard_place' => $user_place,
             ],
@@ -93,9 +93,8 @@ class HistoryController extends Controller
 
                 $response['response'] = $response_arr;
 
-                if ($response_arr['game_count'] % 2 == 0) {
-                    $user->average()->create(['score' => round($user->history()->avg('points'), 2)]);
-                }
+                
+                $user->average()->create(['score' => round($user->history()->avg('points'), 2)]);
 
                 if ($new_record->level == 1) {
                     $new_record->delete();
