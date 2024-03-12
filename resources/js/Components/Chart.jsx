@@ -1,7 +1,7 @@
 import { Chart as ChartJS } from 'chart.js/auto';
 import { Line } from 'react-chartjs-2';
 
-export default function Chart({ colors, chart }) {
+export default function Chart({ colors, chart, height = '150px', width = '100%' }) {
     function convertHex(hexCode, opacity = 1){
         var hex = hexCode.replace('#', '');
     
@@ -24,8 +24,8 @@ export default function Chart({ colors, chart }) {
     return (
         <Line
             style={{
-                height: '150px',
-                width: '100%',
+                height: height,
+                width: width,
             }}
             datasetIdKey='id'
             data={{

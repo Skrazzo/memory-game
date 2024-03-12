@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
@@ -30,8 +31,29 @@ class HistoryController extends Controller
             'data' => $user->average()->pluck('score')
         ];
 
+        // creates leaderboard array for all users
+        $leaderboard = User::all()->map(function ($user) {
+            return [
+                'name' => $user->name,
+                'highest'  => $user->history()->max('points'),
+            ];
+        });
+
+        // calculate users place in the leaderboard from his highest points
+        $user_best  = $user->history()->max('points');
+        $user_place = $leaderboard->search(function ($item) use ($user) {
+            return $item['name'] === $user->name;
+        }) + 1;
+
+
         return Inertia::render('Dashboard', [
-            'chart' => $avg_history
+            'chart' => $avg_history,
+            'stats' => [
+                'games_played' => $user->history()->count(),
+                'average_points' => $user->history()->avg('points'),
+                'user_best' => $user_best,
+                'leaderboard_place' => $user_place,
+            ],
         ]);
     }
 

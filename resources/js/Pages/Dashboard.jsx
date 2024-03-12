@@ -11,13 +11,12 @@ import NoChart from '@/Components/NoChart';
 export default function Dashboard({ auth, chart, stats }) {
     const [colors, setColors] = useState({});
 
-    console.log(chart);
+    console.log(stats);
 
     useEffect(() => {
         getThemeColors();
     }, []);
 
-    
 
 
     useEffect(() => console.log(colors), [colors]);
