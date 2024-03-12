@@ -66,7 +66,7 @@ export default function Dashboard({ auth, chart, stats }) {
                 }
                 
 
-                <div className={`${s.form_accent} ${s.primary_text} mt-6 rounded-md p-2 sm:p-4`}>
+                <div className={`${s.form_accent} ${s.primary_text} mt-6 rounded-md p-2 sm:p-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:place-items-center`}>
                     <div className={`flex gap-2 items-center`}>
                         <IconDeviceGamepad2 {...stats_icon_props}/>
                         <span className='text-lg'><strong>{stats.games_played}</strong> played</span>
