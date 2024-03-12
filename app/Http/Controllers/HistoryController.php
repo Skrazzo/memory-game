@@ -52,7 +52,6 @@ class HistoryController extends Controller
         $user_place = array_search($user->name, array_column($leaderboard, 'name')) + 1;
         if(!$user_place) $user_place = 0; // check, in case array_search returned false
         
-
         return Inertia::render('Dashboard', [
             'chart' => $avg_history,
             'stats' => [
