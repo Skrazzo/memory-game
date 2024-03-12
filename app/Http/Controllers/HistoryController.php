@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
 
@@ -39,12 +40,17 @@ class HistoryController extends Controller
             ];
         });
 
+        $leaderboard = array_values(Arr::sortDesc($leaderboard, function($value) {
+            return $value['highest'];
+        }));
+
+
+        
         // calculate users place in the leaderboard from his highest points
         $user_best  = $user->history()->max('points');
-        $user_place = $leaderboard->search(function ($item) use ($user) {
-            return $item['name'] === $user->name;
-        }) + 1;
-
+        $user_place = array_search($user->name, array_column($leaderboard, 'name')) + 1;
+        if(!$user_place) $user_place = 0; // check, in case array_search returned false
+        
 
         return Inertia::render('Dashboard', [
             'chart' => $avg_history,
