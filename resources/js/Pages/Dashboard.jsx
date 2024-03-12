@@ -1,27 +1,27 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import s from '@/Components/scss/components.module.css';
-
+import main from '@/Components/scss/dashboard.module.css';
 
 import { useEffect, useState } from 'react';
 import Chart from '@/Components/Chart';
 import NoChart from '@/Components/NoChart';
-import { IconDeviceGamepad2, IconLayoutList, IconTargetArrow, IconTrophy } from '@tabler/icons-react';
+import { IconCircleChevronsUp, IconDeviceGamepad2, IconLayoutList, IconTargetArrow, IconTrophy } from '@tabler/icons-react';
 import useMediaQuery from '@custom-react-hooks/use-media-query';
 
 
-export default function Dashboard({ auth, chart, stats }) {
+export default function Dashboard({ auth, chart, stats, history }) {
     const [colors, setColors] = useState({});
     const sm = useMediaQuery('(max-width: 640px)');
 
-    console.log(stats);
 
     useEffect(() => {
+        console.log(history);
         getThemeColors();
     }, []);
 
 
-    useEffect(() => console.log(colors), [colors]);
+    //useEffect(() => console.log(colors), [colors]);
 
     /**
      * Retrieves the value of the CSS custom property '--accent' from the body element
@@ -52,6 +52,11 @@ export default function Dashboard({ auth, chart, stats }) {
         strokeWidth: 1.5,
     };
 
+    const history_icon_props = {
+        size: (sm) ? 30 : 44, 
+        strokeWidth: (sm) ? 1 : 1.5
+    };
+
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -66,23 +71,61 @@ export default function Dashboard({ auth, chart, stats }) {
                 }
                 
 
-                <div className={`${s.form_accent} ${s.primary_text} mt-6 rounded-md p-2 sm:p-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:place-items-center`}>
+                <div className={`${s.form_accent} ${s.primary_text} mt-6 sm:rounded-md p-2 sm:p-4 grid grid-cols-2 sm:grid-cols-4 gap-2 sm:place-items-center`}>
                     <div className={`flex gap-2 items-center`}>
                         <IconDeviceGamepad2 {...stats_icon_props}/>
-                        <span className='text-lg'><strong>{stats.games_played}</strong> played</span>
+                        <span className='sm:text-lg'><strong>{stats.games_played}</strong> played</span>
                     </div>
                     <div className={`flex gap-2 items-center`}>
                         <IconTargetArrow {...stats_icon_props}/>
-                        <span className='text-lg'><strong>{stats.average_points}</strong> on average</span>
+                        <span className='sm:text-lg'><strong>{stats.average_points}</strong> on average</span>
                     </div>
                     <div className={`flex gap-2 items-center`}>
                         <IconTrophy {...stats_icon_props}/>
-                        <span className='text-lg'><strong>{(stats.user_best) ? stats.user_best : 'No PB'}</strong></span>
+                        <span className='sm:text-lg'><strong>{(stats.user_best) ? stats.user_best : 'No PB'}</strong></span>
                     </div>
                     <div className={`flex gap-2 items-center`}>
                         <IconLayoutList {...stats_icon_props} />
-                        <span className='text-lg'><strong>{stats.leaderboard_place}.</strong> place</span>
+                        <span className='sm:text-lg'><strong>{stats.leaderboard_place}.</strong> place</span>
                     </div>
+                </div>
+
+                <div className='mt-6 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4'>
+                    <article className={main.history_container}>
+                        <div className={s.primary_text}>
+                            <div>
+                                <IconTargetArrow {...history_icon_props}/>
+                                <strong>1071</strong>
+                            </div>
+
+                            <div>
+                                <IconCircleChevronsUp {...history_icon_props}/>
+                                <strong>11</strong>
+                            </div>
+                        </div>
+
+                        <span className={`${s.secondary_text} italic text-center`}>2024-03-12 14:45</span>
+                    </article>
+
+                    <article className={main.history_container}>
+                        <div className={s.primary_text}>
+                            <div>
+                                <IconTargetArrow {...history_icon_props}/>
+                                <strong>1071</strong>
+                            </div>
+
+                            <div>
+                                <IconCircleChevronsUp {...history_icon_props}/>
+                                <strong>11</strong>
+                            </div>
+                        </div>
+
+                        <span className={`${s.secondary_text} italic text-center`}>2024-03-12 14:45</span>
+                        
+                        <div className={main.history_hover}>
+                            
+                        </div>
+                    </article>
                 </div>
             </div>
         </AuthenticatedLayout>

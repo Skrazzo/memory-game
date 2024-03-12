@@ -12,5 +12,9 @@ class History extends Model
         'level'
     ];
     
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i',
+    ];
+
     use HasFactory;
 }

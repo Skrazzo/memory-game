@@ -1,0 +1,31 @@
+.history_container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    padding: 16px;
+    border-radius: 8px;
+    background-color: var(--form-background);
+    
+    & div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+}
+
+@media (max-width: 640px) {
+    .history_container{
+        padding: 8px;
+    }
+
+    .history_container:nth-child(odd){
+        border-radius: 0 8px 8px 0;
+    }
+
+    .history_container:nth-child(even){
+        border-radius: 8px 0 0 8px;
+    }
+}
