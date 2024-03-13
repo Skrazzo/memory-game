@@ -100,8 +100,10 @@ class HistoryController extends Controller
 
                 $response['response'] = $response_arr;
 
-                
-                $user->average()->create(['score' => round($user->history()->avg('points'), 2)]);
+                // store user average from last 4 games                
+                $avg = round($user->history()->orderBy('created_at', 'desc')->limit(4)->avg('points'), 2);
+                $user->average()->create(['score' => $avg]);
+
 
                 if ($new_record->level == 1) {
                     $new_record->delete();
