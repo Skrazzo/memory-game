@@ -17,7 +17,7 @@ class AverageScoresFactory extends Factory
     public function definition(): array
     {
         return [
-            'score' => fake()->numberBetween(240, 1200)
+            'score' => fake()->numberBetween(1400, 1500)
         ];
     }
 }

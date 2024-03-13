@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
     {
         
         User::factory(10)
-            ->has(History::factory(20))
-            ->has(AverageScores::factory(20), 'average')
+            ->has(History::factory(100))
+            ->has(AverageScores::factory(100), 'average')
             ->create();
     }
 }

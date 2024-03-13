@@ -23,6 +23,8 @@ Route::middleware('auth')->group(function(){
     Route::get('/play', function () {
         return Inertia::render('Play');
     })->name('play');
+
+    Route::get('/leaderboard', [HistoryController::class, 'leaderboard_index'])->name('leaderboard');
 });
 
 

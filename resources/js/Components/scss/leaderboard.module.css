@@ -1,0 +1,8 @@
+.leaderboard_container{
+    display: flex;
+    gap: 0.5rem;
+
+    border-radius: 0.25rem;
+    padding: 1rem;
+    background-color: var(--form-background);
+}

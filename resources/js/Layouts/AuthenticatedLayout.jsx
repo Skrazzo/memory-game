@@ -5,7 +5,7 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 import s from '@/Components/scss/components.module.css';
-import { IconDeviceGamepad2, IconLayoutDashboard } from '@tabler/icons-react';
+import { IconDeviceGamepad2, IconLayoutDashboard, IconLayoutList } from '@tabler/icons-react';
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
@@ -27,6 +27,10 @@ export default function Authenticated({ user, header, children }) {
                                     <IconLayoutDashboard className={`${s.nav_icon}`}/> Dashboard
                                 </NavLink>
                                 
+                                <NavLink href={route('leaderboard')} active={route().current('leaderboard')}>
+                                    <IconLayoutList className={`${s.nav_icon}`}/> Leaderboard
+                                </NavLink>
+
                                 <NavLink href={route('play')} active={route().current('play')}>
                                     <IconDeviceGamepad2 className={`${s.nav_icon}`}/> Play
                                 </NavLink>
@@ -100,6 +104,10 @@ export default function Authenticated({ user, header, children }) {
                     <div className="pt-2 pb-3 space-y-1">
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             <IconLayoutDashboard className={`${s.nav_icon}`}/> Dashboard
+                        </ResponsiveNavLink>
+
+                        <ResponsiveNavLink href={route('leaderboard')} active={route().current('leaderboard')}>
+                            <IconLayoutList className={`${s.nav_icon}`}/> Leaderboard
                         </ResponsiveNavLink>
 
                         <ResponsiveNavLink href={route('play')} active={route().current('play')}>

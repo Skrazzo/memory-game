@@ -113,4 +113,31 @@ class HistoryController extends Controller
 
         return $response;
     }
+
+
+    function leaderboard_index(Request $req){
+        $user = $req->user();
+
+        // creates leaderboard array for all users
+        $leaderboard = User::all()->map(function ($user) {
+            return [
+                'name' => $user->name,
+                'highest'  => $user->history()->max('points'),
+            ];
+        });
+
+        $leaderboard = array_values(Arr::sortDesc($leaderboard, function($value) {
+            return $value['highest'];
+        }));
+        
+        $user_place = array_search($user->name, array_column($leaderboard, 'name')) + 1;
+        if(!$user_place) $user_place = 0; // check, in case array_search returned false
+
+        return Inertia::render('Leaderboard', [
+            'leaderboard' => [
+                'data' => $leaderboard,
+                'place' => $user_place
+            ]
+        ]);
+    }
 }
