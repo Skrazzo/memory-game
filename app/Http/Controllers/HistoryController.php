@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
 use Inertia\Inertia;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 /**
  * Class HistoryController
@@ -135,9 +138,16 @@ class HistoryController extends Controller
 
         return Inertia::render('Leaderboard', [
             'leaderboard' => [
-                'data' => $leaderboard,
+                'data' => $this->paginate($leaderboard, 10),
                 'place' => $user_place
             ]
         ]);
+    }
+
+    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 }
