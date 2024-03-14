@@ -2,7 +2,7 @@ import s from "@/Components/scss/components.module.css";
 import { Link } from "@inertiajs/react";
 import { IconChevronLeft, IconChevronRight } from "@tabler/icons-react";
 
-export default function Paginator({ current_page, next_page_url, prev_page_url, className = '' }) {
+export default function Paginator({ current_page, next_page_url, prev_page_url, className = ''}) {
     return (
         <div className={`w-full flex justify-center items-center gap-2 ${className}`}>
             {prev_page_url &&

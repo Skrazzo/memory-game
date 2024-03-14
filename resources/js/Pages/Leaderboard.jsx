@@ -1,4 +1,5 @@
 import LeaderboardContainer from '@/Components/LeaderboardContainer';
+import Paginator from '@/Components/Paginator';
 import main from '@/Components/scss/components.module.css';
 import s from '@/Components/scss/leaderboard.module.css';
 import Authenticated from '@/Layouts/AuthenticatedLayout';
@@ -23,10 +24,11 @@ export default function Leaderboard({ auth, leaderboard }) {
                 <div className='flex flex-col gap-2'>
                     {leaderboard.data.data.map((x, i) => {
 
-                        return <LeaderboardContainer appearAfterMS={i * 50} n={(i + 1)} name={x.name} score={x.highest} you={(auth.user.name === x.name)}/>;
+                        return <LeaderboardContainer appearAfterMS={i * 35} n={(i + 1)} name={x.name} score={x.highest} you={(auth.user.name === x.name)}/>;
                     })}
                 </div>
 
+                <Paginator {...leaderboard.data} />
             </div>
 
         </Authenticated>

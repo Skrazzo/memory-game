@@ -121,6 +121,8 @@ class HistoryController extends Controller
     function leaderboard_index(Request $req){
         $user = $req->user();
 
+
+
         // creates leaderboard array for all users
         $leaderboard = User::all()->map(function ($user) {
             return [
@@ -138,16 +140,34 @@ class HistoryController extends Controller
 
         return Inertia::render('Leaderboard', [
             'leaderboard' => [
-                'data' => $this->paginate($leaderboard, 10),
+                'data' => $this->simplePaginate($leaderboard, (request()->has('page')) ? request()->page : 1),
                 'place' => $user_place
             ]
         ]);
     }
 
-    public function paginate($items, $perPage = 5, $page = null, $options = [])
+    function simplePaginate(array $arr, int $page = 1, int $length = 10, string $baseUrl = './?page='): array
     {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+        $page = max(1, $page); // Ensure page number is at least 1
+        $length = max(1, $length); // Ensure length is at least 1
+
+        $next = $baseUrl . ($page + 1);
+        if (($page * $length) > count($arr)) {
+            $next = null;
+        }
+
+        $prev = $baseUrl . ($page - 1);
+        if ($page == 1) {
+            $prev = null;
+        }
+
+        $subset = array_slice($arr, ($page - 1) * $length, $length);
+
+        return [
+            'current_page' => $page,
+            'next_page_url' => $next,
+            'prev_page_url' => $prev,
+            'data' => $subset,
+        ];
     }
 }
