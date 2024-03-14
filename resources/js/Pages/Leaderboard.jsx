@@ -19,8 +19,13 @@ export default function Leaderboard({ auth, leaderboard }) {
         >
             <Head title='Leaderboard'/>
 
-            <div className={`my-12 max-w-6xl md:mx-4 md:rounded-lg xl:mx-auto p-2 lg:p-4`}>
-                <LeaderboardContainer n={1} name={'Leons Aleksandrovs'} score={69420}/>
+            <div className={`my-12 max-w-xl md:mx-4 md:rounded-lg xl:mx-auto p-2 lg:p-4`}>
+                <div className='flex flex-col gap-2'>
+                    {leaderboard.data.map((x, i) => {
+
+                        return <LeaderboardContainer appearAfterMS={i * 50} n={(i + 1)} name={x.name} score={x.highest} you={(auth.user.name === x.name)}/>;
+                    })}
+                </div>
 
             </div>
 

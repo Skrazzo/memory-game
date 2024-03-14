@@ -1,8 +1,38 @@
 .leaderboard_container{
     display: flex;
+    align-items: center;
     gap: 0.5rem;
 
     border-radius: 0.25rem;
     padding: 1rem;
     background-color: var(--form-background);
+
+    animation: appear 250ms forwards ease-out;
+}
+
+.trophy{
+    color: var(--accent);
+    -webkit-filter: drop-shadow( 0px 0px 10px var(--accent));
+    filter: drop-shadow( 0px 0px 10px var(--accent));
+}
+
+.leaderboard_you{
+    box-shadow: 0 0 1.5rem -5px var(--accent);
+    background-color: var(--accent);
+    /* border: 1px solid var(--accent); */
+
+    .trophy{
+        color: var(--primary-text-lighter);
+        -webkit-filter: drop-shadow( 0px 0px 10px var(--primary-text-lighter));
+        filter: drop-shadow( 0px 0px 10px var(--primary-text-lighter));
+    }
+}
+
+@keyframes appear {
+    0%{
+        /* transform: translateY(-20px); */
+        scale: 0.8;
+        opacity: 0;
+    }
+
 }

@@ -17,7 +17,7 @@ class HistoryFactory extends Factory
     public function definition(): array
     {
         return [
-            'points' => fake()->numberBetween(100, 2000),
+            'points' => fake()->numberBetween(100, 1500),
             'level' => fake()->numberBetween(5, 16),
         ];
     }

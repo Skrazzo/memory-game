@@ -16,8 +16,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
-        User::factory(10)
+        User::create([
+            'name' => 'Leons Aleksandrovs',
+            'email' => 'skrazzo@proton.me',
+            'password' => 'labdien',
+        ]);
+
+        User::factory(40)
             ->has(History::factory(100))
             ->has(AverageScores::factory(100), 'average')
             ->create();
