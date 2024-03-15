@@ -21,11 +21,16 @@ export default function Leaderboard({ auth, leaderboard }) {
             <Head title='Leaderboard'/>
 
             <div className={`my-12 max-w-xl md:mx-4 md:rounded-lg xl:mx-auto p-2 lg:p-4`}>
-                <div className='flex flex-col gap-2'>
-                    {leaderboard.data.data.map((x, i) => {
+                <div style={{
+                    minHeight: `${(58+8) * 10 - 8}px`
+                }} >
+                    <div className='flex flex-col gap-2'>
+                        {leaderboard.data.data.map((x, i) => {
 
-                        return <LeaderboardContainer appearAfterMS={i * 35} n={(i + 1)} name={x.name} score={x.highest} you={(auth.user.name === x.name)}/>;
-                    })}
+                            return <LeaderboardContainer appearAfterMS={i * 35} n={(i + 1)} name={x.name} score={x.highest} you={(auth.user.name === x.name)}/>;
+                        })}
+                    </div>
+
                 </div>
 
                 <Paginator {...leaderboard.data} />
