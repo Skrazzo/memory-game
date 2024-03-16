@@ -91,8 +91,8 @@ export default function Dashboard({ auth, chart, stats, history }) {
                 </div>
 
                 <div className='mt-6 grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4'>
-                    {history.data.map((x) => {
-                        return <DashboardHistoryContainer key={v4()} {...x}/>;
+                    {history.data.map((x, i) => {
+                        return <DashboardHistoryContainer appearAfterMS={0} key={v4()} {...x}/>;
                     })}
                 </div>
 

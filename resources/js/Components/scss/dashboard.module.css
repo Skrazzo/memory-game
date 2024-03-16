@@ -24,6 +24,14 @@
     & :hover{
         box-shadow: 0 0 50px -10px var(--accent);
     }
+
+    animation: appear 250ms forwards ease-in;
+}
+
+@keyframes appear {
+    0%{
+        opacity: 0;
+    }
 }
 
 @media (max-width: 640px) {
