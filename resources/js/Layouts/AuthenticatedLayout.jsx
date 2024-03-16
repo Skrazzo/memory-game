@@ -5,13 +5,20 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
 import s from '@/Components/scss/components.module.css';
-import { IconDeviceGamepad2, IconLayoutDashboard, IconLayoutList } from '@tabler/icons-react';
+import { IconDeviceGamepad2, IconLayoutDashboard, IconLayoutList, IconLogout, IconUserCircle } from '@tabler/icons-react';
+import { IconPalette } from '@tabler/icons-react';
+import Modal from '@/Components/Modal';
+import ThemesModal from '@/Components/ThemesModal';
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+    const [showThemes, setShowThemes] = useState(false);
 
     return (
         <div className={`min-h-screen ${s.background}`}>
+            <Modal show={showThemes}>
+                <ThemesModal dashboard={route().current('dashboard')} close={() => setShowThemes(false)}/>
+            </Modal>
             <nav className={`${s.form}`}>
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
@@ -65,9 +72,17 @@ export default function Authenticated({ user, header, children }) {
                                     </Dropdown.Trigger>
 
                                     <Dropdown.Content>
-                                        <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('profile.edit')}><IconUserCircle />Profile</Dropdown.Link>
+                                        
+                                        <Dropdown.Link 
+                                            onClick={(e) => {e.preventDefault(); setShowThemes(true)}}
+                                        >
+                                            <IconPalette /> 
+                                            Themes
+                                        </Dropdown.Link>
+                                        
                                         <Dropdown.Link  href={route('logout')} method="post" as="button">
-                                            Log Out
+                                            <IconLogout /> Log Out
                                         </Dropdown.Link>
                                     </Dropdown.Content>
                                 </Dropdown>
@@ -113,12 +128,14 @@ export default function Authenticated({ user, header, children }) {
                         <ResponsiveNavLink href={route('play')} active={route().current('play')}>
                             <IconDeviceGamepad2 className={`${s.nav_icon}`}/> Play
                         </ResponsiveNavLink>
+
+
                     </div>
 
                     <div className="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">
                         <div className="px-4">
-                            <div className="font-medium text-base text-gray-800 dark:text-gray-200">{user.name}</div>
-                            <div className="font-medium text-sm text-gray-500">{user.email}</div>
+                            <div className={`${s.primary_text} font-medium text-base`}>{user.name}</div>
+                            <div className={`${s.secondary_text} font-medium text-sm` }>{user.email}</div>
                         </div>
 
                         <div className="mt-3 space-y-1">

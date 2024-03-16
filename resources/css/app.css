@@ -44,6 +44,13 @@ body{
 
     --secondary-text: #94979C;
     --secondary-text-lighter: #b5b8bd;
+
+    
+}
+
+div[name="dark-purple"] {
+    .preview-accent{ background-color: #4F46E5; }
+    .preview-background{ background-color: #111827; }
 }
 
 [data-theme="dark-green"]{
@@ -62,6 +69,11 @@ body{
     --secondary-text-lighter: #b5b8bd;
 }
 
+div[name="dark-green"] {
+    .preview-accent{ background-color: #6DBA8F; }
+    .preview-background{ background-color: #17180B; }
+}
+
 [data-theme="light-blue"]{
     --accent:#97bff2;
     --accent-darker: #80a5d5;
@@ -76,4 +88,9 @@ body{
 
     --secondary-text: #243230;
     --secondary-text-lighter: #364744;
+}
+
+div[name="light-blue"] {
+    .preview-accent{ background-color: #97bff2; }
+    .preview-background{ background-color: #F9FDFD; }
 }

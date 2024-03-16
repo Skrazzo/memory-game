@@ -40,7 +40,7 @@
 }
 
 .text_input{
-    border: none;
+    /* border: none; */
     background-color: var(--background);
     color: var(--secondary-text);
     border: 1px solid var(--form-background);
