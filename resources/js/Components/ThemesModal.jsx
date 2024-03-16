@@ -9,7 +9,8 @@ export default function ThemesModal({ close, dashboard }) {
     const themes = [
         'light-blue',
         'dark-purple',
-        'dark-green'
+        'dark-green',
+        'dark-blue',
     ]
 
     function setTheme(theme) {

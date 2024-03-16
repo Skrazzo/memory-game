@@ -94,3 +94,24 @@ div[name="light-blue"] {
     .preview-accent{ background-color: #97bff2; }
     .preview-background{ background-color: #F9FDFD; }
 }
+
+[data-theme="dark-blue"]{
+    --accent: #319EF6;
+    --accent-darker: #185585;
+
+    --background: #060B0F;
+    --form-background: #141f2b;
+    --form-background-opacity: rgba(20, 31, 43, 0.6); /* 0.6 */
+    --form-background-lighter: #1d2b3b;
+
+    --primary-text: #E2E8ED;
+    --primary-text-lighter: #ffffff;
+
+    --secondary-text: #c4d5e4;
+    --secondary-text-lighter: #d6ecff;
+}
+
+div[name="dark-blue"] {
+    .preview-accent{ background-color: #319EF6; }
+    .preview-background{ background-color: #060B0F; }
+}
