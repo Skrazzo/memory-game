@@ -13,6 +13,9 @@ createInertiaApp({
     setup({ el, App, props }) {
         const root = createRoot(el);
 
+        // set theme from localstorage
+        document.body.setAttribute('data-theme', localStorage.getItem('theme') || 'light-blue');
+
         root.render(<App {...props} />);
     },
     progress: {

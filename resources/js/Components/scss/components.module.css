@@ -6,6 +6,18 @@
     fill: var(--accent);
 }
 
+.svg_anim svg{
+    animation: 500ms svg_anim ease-out;
+}
+
+@keyframes svg_anim {
+    from{
+        scale: 1.5;
+        opacity: 0;
+        transform: translateY(400px);
+    }
+}
+
 .background_color{
     color: var(--background);
 }

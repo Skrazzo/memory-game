@@ -11,10 +11,15 @@ export default function ThemesModal({ close, dashboard }) {
         'dark-blue',
         'dark-purple',
         'dark-green',
+        'dark-orange',
+        'light-red',
+        'light-acid',
+        'dark-red',
     ]
 
     function setTheme(theme) {
         document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
         setCurrrentTheme(getTheme());
     }
 
