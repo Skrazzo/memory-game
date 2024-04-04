@@ -2,7 +2,7 @@
 # Showcase
 https://github.com/Skrazzo/memory-game/assets/58330666/425e23dd-a1ea-4966-8423-60bc3e015b2c
 
-## Description
+# Description
 Made with:
 * Laravel
 * Breeze
